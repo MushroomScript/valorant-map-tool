@@ -7,15 +7,13 @@ from PIL import Image, ImageTk
 
 _VERSION_ = "1.0.0"
 
+# 打包命令
+# pyinstaller --onefile --windowed --icon=KO.ico --add-data "maps;maps" --add-data "reference_line.png;." --add-data "KO.ico;." --name ValorantMapTool main.py
 
-def resource_path(relative_path):
+
+def resource_path(relative_path: str) -> str:
     """获得资源的绝对路径，无论是开发环境还是打包后一文件模式。"""
-    if getattr(sys, 'frozen', False):
-        # PyInstaller 打包后，资源会被解压到 _MEIPASS
-        base = sys._MEIPASS
-    else:
-        # 开发环境下
-        base = os.path.abspath(".")
+    base = getattr(sys, '_MEIPASS', os.path.abspath('.'))
     return os.path.join(base, relative_path)
 
 
